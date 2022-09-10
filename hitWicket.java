@@ -26,7 +26,7 @@ class hitWicket{
 		}
 		if(player == 'A'){
 			
-			if((row-1)<0){
+			if(row == 0){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
@@ -36,6 +36,7 @@ class hitWicket{
 				chessBoard[row][col] = "-";
 			}
 			else if(next.charAt(0) == 'B'){
+				chessBoard[row-1][col] = chara;
 				chessBoard[row][col] = "-";
 				countB--;
 			}
@@ -46,7 +47,7 @@ class hitWicket{
 		}
 		else{
 			
-			if((row+1)>4){
+			if(row == 4){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
@@ -56,6 +57,7 @@ class hitWicket{
 				chessBoard[row][col] = "-";
 			}
 			else if(next.charAt(0) == 'A'){
+				chessBoard[row+1][col] = chara;
 				chessBoard[row][col] = "-";
 				countA--;
 			}
@@ -90,7 +92,7 @@ class hitWicket{
 		}
 		if(player == 'A'){
 			
-			if((col+1)>4){
+			if(col == 4){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
@@ -100,6 +102,7 @@ class hitWicket{
 				chessBoard[row][col] = "-";
 			}
 			else if(next.charAt(0) == 'B'){
+				chessBoard[row][col+1] = chara;
 				chessBoard[row][col] = "-";
 				countB--;
 			}
@@ -110,7 +113,7 @@ class hitWicket{
 		}
 		else{
 			
-			if((col-1)<0){
+			if(col == 0){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
@@ -120,6 +123,7 @@ class hitWicket{
 				chessBoard[row][col] = "-";
 			}
 			else if(next.charAt(0) == 'A'){
+				chessBoard[row][col-1] = chara;
 				chessBoard[row][col] = "-";
 				countA--;
 			}
@@ -152,27 +156,8 @@ class hitWicket{
 			System.out.println("Character Doesn't Exist!!");
 			playerMove(player);
 		}
-		if(player == 'B'){
-			if((col+1)>4){
-				System.out.println("You can not move here");
-				playerMove(player);
-			}
-			String next = chessBoard[row][col+1];
-			if(chessBoard[row][col+1] == "-"){
-				chessBoard[row][col+1] = chara;
-				chessBoard[row][col] = "-";
-			}
-			else if(next.charAt(0) == 'B'){
-				chessBoard[row][col] = "-";
-				countA--;
-			}
-			else{
-				System.out.println("You can not move here");
-				playerMove(player);
-			}
-		}
-		else{
-			if((col-1)<0){
+		if(player == 'A'){
+			if(col == 0){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
@@ -181,9 +166,30 @@ class hitWicket{
 				chessBoard[row][col-1] = chara;
 				chessBoard[row][col] = "-";
 			}
-			else if(next.charAt(0) == 'A'){
+			else if(next.charAt(0) == 'B'){
+				chessBoard[row][col-1] = chara;
 				chessBoard[row][col] = "-";
 				countB--;
+			}
+			else{
+				System.out.println("You can not move here");
+				playerMove(player);
+			}
+		}
+		else{
+			if(col == 0){
+				System.out.println("You can not move here");
+				playerMove(player);
+			}
+			String next = chessBoard[row][col+1];
+			if(chessBoard[row][col+1] == "-"){
+				chessBoard[row][col+1] = chara;
+				chessBoard[row][col] = "-";
+			}
+			else if(next.charAt(0) == 'A'){
+				chessBoard[row][col+1] = chara;
+				chessBoard[row][col] = "-";
+				countA--;
 			}
 			else{
 				System.out.println("You can not move here");
@@ -214,29 +220,9 @@ class hitWicket{
 			System.out.println("Character Doesn't Exist!!");
 			playerMove(player);
 		}
-		if(player == 'B'){
+		if(player == 'A'){
 			
-			if((row-1)<0){
-				System.out.println("You can not move here");
-				playerMove(player);
-			}
-			String next = chessBoard[row-1][col];
-			if(chessBoard[row-1][col] == "-"){
-				chessBoard[row-1][col] = chara;
-				chessBoard[row][col] = "-";
-			}
-			else if(next.charAt(0) == 'A'){
-				chessBoard[row][col] = "-";
-				countA--;
-			}
-			else{
-				System.out.println("You can not move here");
-				playerMove(player);
-			}
-		}
-		else{
-			
-			if((row+1)>4){
+			if(row == 4){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
@@ -245,9 +231,31 @@ class hitWicket{
 				chessBoard[row+1][col] = chara;
 				chessBoard[row][col] = "-";
 			}
-			else if(next.charAt(0) == 'B'){
+			else if(next.charAt(0) == 'A'){
+				chessBoard[row+1][col] = chara;
 				chessBoard[row][col] = "-";
 				countB--;
+			}
+			else{
+				System.out.println("You can not move here");
+				playerMove(player);
+			}
+		}
+		else{
+			
+			if(row == 0){
+				System.out.println("You can not move here");
+				playerMove(player);
+			}
+			String next = chessBoard[row-1][col];
+			if(chessBoard[row-1][col] == "-"){
+				chessBoard[row-1][col] = chara;
+				chessBoard[row][col] = "-";
+			}
+			else if(next.charAt(0) == 'B'){
+				chessBoard[row-1][col] = chara;
+				chessBoard[row][col] = "-";
+				countA--;
 			}
 			else{
 				System.out.println("You can not move here");
