@@ -25,12 +25,13 @@ class hitWicket{
 			playerMove(player);
 		}
 		if(player == 'A'){
-			String next = chessBoard[row-1][col];
+			
 			if((row-1)<0){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
-			else if(chessBoard[row-1][col] == "-"){
+			String next = chessBoard[row-1][col];
+			if(chessBoard[row-1][col] == "-"){
 				chessBoard[row-1][col] = chara;
 				chessBoard[row][col] = "-";
 			}
@@ -44,12 +45,13 @@ class hitWicket{
 			}
 		}
 		else{
-			String next = chessBoard[row+1][col];
+			
 			if((row+1)>4){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
-			else if(chessBoard[row+1][col] == "-"){
+			String next = chessBoard[row+1][col];
+			if(chessBoard[row+1][col] == "-"){
 				chessBoard[row+1][col] = chara;
 				chessBoard[row][col] = "-";
 			}
@@ -87,12 +89,13 @@ class hitWicket{
 			playerMove(player);
 		}
 		if(player == 'A'){
-			String next = chessBoard[row][col+1];
+			
 			if((col+1)>4){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
-			else if(chessBoard[row][col+1] == "-"){
+			String next = chessBoard[row][col+1];
+			if(chessBoard[row][col+1] == "-"){
 				chessBoard[row][col+1] = chara;
 				chessBoard[row][col] = "-";
 			}
@@ -106,12 +109,13 @@ class hitWicket{
 			}
 		}
 		else{
-			String next = chessBoard[row][col-1];
+			
 			if((col-1)<0){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
-			else if(chessBoard[row][col-1] == "-"){
+			String next = chessBoard[row][col-1];
+			if(chessBoard[row][col-1] == "-"){
 				chessBoard[row][col-1] = chara;
 				chessBoard[row][col] = "-";
 			}
@@ -149,12 +153,12 @@ class hitWicket{
 			playerMove(player);
 		}
 		if(player == 'B'){
-			String next = chessBoard[row][col+1];
 			if((col+1)>4){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
-			else if(chessBoard[row][col+1] == "-"){
+			String next = chessBoard[row][col+1];
+			if(chessBoard[row][col+1] == "-"){
 				chessBoard[row][col+1] = chara;
 				chessBoard[row][col] = "-";
 			}
@@ -168,12 +172,12 @@ class hitWicket{
 			}
 		}
 		else{
-			String next = chessBoard[row][col-1];
 			if((col-1)<0){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
-			else if(chessBoard[row][col-1] == "-"){
+			String next = chessBoard[row][col-1];
+			if(chessBoard[row][col-1] == "-"){
 				chessBoard[row][col-1] = chara;
 				chessBoard[row][col] = "-";
 			}
@@ -211,12 +215,13 @@ class hitWicket{
 			playerMove(player);
 		}
 		if(player == 'B'){
-			String next = chessBoard[row-1][col];
+			
 			if((row-1)<0){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
-			else if(chessBoard[row-1][col] == "-"){
+			String next = chessBoard[row-1][col];
+			if(chessBoard[row-1][col] == "-"){
 				chessBoard[row-1][col] = chara;
 				chessBoard[row][col] = "-";
 			}
@@ -230,12 +235,13 @@ class hitWicket{
 			}
 		}
 		else{
-			String next = chessBoard[row+1][col];
+			
 			if((row+1)>4){
 				System.out.println("You can not move here");
 				playerMove(player);
 			}
-			else if(chessBoard[row+1][col] == "-"){
+			String next = chessBoard[row+1][col];
+			if(chessBoard[row+1][col] == "-"){
 				chessBoard[row+1][col] = chara;
 				chessBoard[row][col] = "-";
 			}
@@ -290,11 +296,41 @@ class hitWicket{
 		System.out.println("--------------------Current Grid------------------------------");
 		for(int i=0; i<5; i++){
 			for(int j=0; j<5; j++){
-				System.out.print(chessBoard[i][j]+"      ");
+				System.out.print(chessBoard[i][j]+"                   ");
 			}
 			System.out.println();
 		}
 	}
+
+	// Validate Characters
+	public static boolean validate(String pawn, char player){
+		char c = pawn.charAt(3);
+		String s = String.valueOf(c);
+		int num = Integer.parseInt(s);
+		if(pawn.charAt(0) == player && num>0 && num<6 && pawn.charAt(2) == 'P')
+			return true;
+		else
+			return false;
+	}
+
+	//Input Squad
+	public static void addSquad(char player){
+		for(int i=0; i<5; i++){
+			String pawn = sc.nextLine();
+			if(validate(pawn, player)){
+				if(player == 'A')
+					chessBoard[4][i] = pawn;
+				else
+					chessBoard[0][i] = pawn;
+			}
+			else{
+				System.out.println("Enter a valid character");
+				addSquad(player);
+			}	
+		}
+		displayGrid();
+	}
+
 
 	// DRIVER CODE
 	public static void main(String args[]){
@@ -305,19 +341,12 @@ class hitWicket{
 				chessBoard[i][j] = "-";
 			}
 		}
+
+
 		System.out.println("--------------------Player1 enter your squad------------------------------");
-		for(int i=0; i<5; i++){
-			String pawn = sc.nextLine();
-			chessBoard[4][i] = pawn;
-			
-		}
-		displayGrid();
+		addSquad('A');
 		System.out.println("--------------------Player2 enter your squad------------------------------");
-		for(int i=0; i<5; i++){
-			String pawn = sc.nextLine();
-			chessBoard[0][i] = pawn;	
-		}
-		displayGrid();
+		addSquad('B');
 		char player = 'A';
 		while(countB > 0 && countA > 0){
 			if(player == 'A'){
@@ -330,6 +359,12 @@ class hitWicket{
 				playerMove(player);
 				player = 'A';
 			}
+		}
+		if(countB==0){
+			System.out.println("Congratulations Player A you won");
+		}
+		if(countA==0){
+			System.out.println("Congratulations Player B you won");
 		}
 	}
 	
